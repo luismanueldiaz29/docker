@@ -46,3 +46,15 @@ services:
       KAFKA_REST_SCHEMA_REGISTRY_URL: schema-registry:38081
       KAFKA_REST_HOST_NAME: kafka-rest
       KAFKA_REST_LISTENERS: http://kafka-rest:38082
+  magic:
+    image: digitsy/kafka-magic
+    container_name: kafka-magic-local
+    ports:
+      - "8087:80"
+    volumes:
+      - ./config:/config
+    environment:
+      # KMAGIC_ALLOW_TOPIC_DELETE: "true"
+      KMAGIC_CONFIG_STORE_TYPE: "file"
+      KMAGIC_CONFIG_STORE_CONNECTION: "Data Source=/config/KafkaMagicConfig.db;"
+      KMAGIC_CONFIG_ENCRYPTION_KEY: "123456aA"
